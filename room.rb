@@ -28,20 +28,21 @@ class Room
 
   def add_songs(song)
     @songs_list.push(song)
+    for guest in @checked_in_guests
+      if (guest.favourite_song == song)
+        return guest.cheer()
+      end
+    end
   end
 
   def reached_capacity
-    if number_of_guests > capacity
-      return "I'm sorry we have reached capacity for this room"
-    else
-      return "Come on in!"
-    end
+    return number_of_guests >= capacity
   end
+
 
   def pay_entry_fee(guest)
     if guest.wallet >= @entrance_fee
       guest.remove_money(@entrance_fee)
     end
   end
-
 end

@@ -7,8 +7,8 @@ require_relative('../song')
 class RoomTest < Minitest::Test
 
   def setup
-    @guest1 = Guest.new("Bruce", "The River", 10)
-    @guest2 = Guest.new("Lana", "Video Games", 8)
+    @guest1 = Guest.new("Bruce", "The River", 10, "Rockin!")
+    @guest2 = Guest.new("Lana", "Video Games", 8, "Meh")
 
 
     @room1_checked_in_guests = [@guest1, @guest2]
@@ -20,8 +20,8 @@ class RoomTest < Minitest::Test
     @room1_songs_list = [song1, song2, song3]
     @room1 = Room.new("237", 4, @room1_songs_list, @room1_checked_in_guests, 3)
 
-    @guest3 = Guest.new("Bob", "Mr Tambourine Man", 6)
-    @guest4 = Guest.new("David", "Starman", 7)
+    @guest3 = Guest.new("Bob", "Mr Tambourine Man", 6, "Woooo!")
+    @guest4 = Guest.new("David", "Starman", 7, 'Oh yeah!')
     @song4 = Song.new('Blowin in the Wind')
 
 
@@ -70,7 +70,7 @@ class RoomTest < Minitest::Test
   def test_reached_capacity
     @room1.check_in_guest(@guest3)
     @room1.check_in_guest(@guest4)
-    assert_equal(@room1.reached_capacity, "I'm sorry we have reached capacity for this room")
+    assert_equal(@room1.reached_capacity, true)
   end
 
   def test_pay_entry_fee
